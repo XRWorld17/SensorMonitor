@@ -4,10 +4,14 @@ import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 import com.romainpiel.shimmer.ShimmerViewBase;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +42,17 @@ public class IndexActivity extends Activity {
 		if(title==null){
 			initialViews();
 		}
+
+
+		int hasWriteStoragePermission = ContextCompat.checkSelfPermission(getApplication(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+		if (hasWriteStoragePermission == PackageManager.PERMISSION_GRANTED) {
+			//拥有权限，执行操作
+
+		}else{
+			//没有权限，向用户请求权限
+			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+		}
+
 		shimmer = new Shimmer();
 		shimmer.start(title);
 		myPhone.setOnClickListener(new OnClickListener() {
