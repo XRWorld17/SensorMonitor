@@ -28,6 +28,7 @@ import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -352,7 +353,9 @@ public class AccelActivity extends Activity{
 												WriteExcel.writeList(outList);
 											} catch (IOException e) {
 												// TODO Auto-generated catch block
+												Looper.prepare();
 												Toast.makeText(AccelActivity.this, "没有sd卡权限或手机内存已满", Toast.LENGTH_LONG).show();
+												Looper.loop();
 											}
 									return null;
 								}

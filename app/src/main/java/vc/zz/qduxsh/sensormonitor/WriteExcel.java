@@ -27,9 +27,13 @@ public class WriteExcel {
         	HSSFCell cell_1_1 = row1.createCell(0);//参数为列数，从0开始  
         	cell_1_1.setCellValue(list.get(i)!=null?(list.get(i).getValue()+""):"null");  
         	HSSFCell cell_1_2 = row1.createCell(1);  
-        	cell_1_2.setCellValue(list.get(i)!=null?new SimpleDateFormat("HH:mm:ss:SSS").format(new Date(list.get(i).getTime())):"null");  
-			
-		}
+        	cell_1_2.setCellValue(list.get(i)!=null?new SimpleDateFormat("HH:mm:ss:SSS").format(new Date(list.get(i).getTime())):"null");
+
+            HSSFCell cell_1_3 = row1.createCell(2);
+            long tm = list.get(i).getTime();
+            cell_1_3.setCellValue(list.get(i)!=null? String.valueOf(tm):"null");
+
+        }
           
           
         //保存为xls文件  
