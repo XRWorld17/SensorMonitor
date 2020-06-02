@@ -2,6 +2,7 @@ package vc.zz.qduxsh.sensormonitor;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +31,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -421,7 +423,12 @@ public class AccelActivity extends Activity{
 					// TODO Auto-generated method stub
 					xText.setText(event.values[0]+""); 
 					yText.setText(event.values[1]+""); 
-					zText.setText(event.values[2]+""); 
+					zText.setText(event.values[2]+"");
+
+					int acc = event.accuracy;
+					long sensortimestamp = event.timestamp;
+					Log.d("wwb","sensor "+ event.sensor.getStringType()+ ", accuracy:"+acc + ", timestamp:"+sensortimestamp +", value: ["+ event.values[0] + " "+event.values[1]+" "+ event.values[2]+"]"   );
+
 					double sum = threeDimenToOne(event.values[0], event.values[1], event.values[2]);
 						
 					giveAverage(sum);//将当前测量的结果写入buffer，然后定期求buffer里面的平均值，并显示
